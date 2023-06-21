@@ -14,6 +14,7 @@ const PokedexName = () => {
         getPokemonByName()
     }, [name])
 
+    console.log(pokemon);
 
   return (
     <>
