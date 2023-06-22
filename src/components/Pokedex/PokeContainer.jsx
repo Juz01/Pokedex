@@ -12,40 +12,37 @@ const nextPage = () => {
 }
 
     return (
-        <div className="poke__container">
-            {
-                initialItems?.map((pokemon) => (
-                    <PokeCard 
-                    key={pokemon.name} 
-                    url = {pokemon.url} 
-                />
-                ))
-            }
-            <div className="pagination">
-                <button onClick={previousPage}
-                        disabled={initialPage === 1}
-                >
-                    Previous
-                </button>
+        <>
+            <div className="poke__container">
+                {
+                    initialItems?.map((pokemon) => (
+                        <PokeCard 
+                        key={pokemon.name} 
+                        url = {pokemon.url} 
+                    />
+                    ))
+                }     
             </div>
-            <span>{ initialPage }</span>
-            <button 
-                onClick={nextPage}
-                disable={initialItems?.length < contentPerPage}
-            > 
-            Next
-            </button>
-        {/* {
-            pokemons?.map(pokemon => (
-                <PokeCard 
-                    key={pokemon.name} 
-                    url = {pokemon.url} 
-                />
-            ))
-            
-        } */}
-        
-        </div>
+            <footer className="pagination__footer">
+                <div className="pagination">
+                    <button className="pagination__btn-prev" onClick={previousPage}
+                            disabled={initialPage === 1}
+                    >
+                        Previous
+                    </button>
+                </div>
+                <span className="pagination__pages">{ initialPage }</span>
+                <div className="pagination">
+                    <button 
+                        className="pagination__next"
+                        onClick={nextPage}
+                        disable={initialItems?.length < contentPerPage}
+                    > 
+                    Next
+                    </button>
+                </div>
+            </footer>
+        </>
     )
 }
 

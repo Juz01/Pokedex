@@ -36,7 +36,7 @@ const Home = () => {
                 </form>
             </div>
             <div className="home__footer">
-                <img src="./footerpokedex.svg" alt="" />
+                <img className="home__footer-img" src="./footerpokedex.svg" alt="" />
             </div>
         </div>
     )

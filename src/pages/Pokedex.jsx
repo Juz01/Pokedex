@@ -7,17 +7,12 @@ import axios from "axios";
 import './styles/Pokedex.css'
 
 const Pokedex = () => {
-    const searchPokemon  = useRef()
-    const navigate = useNavigate()
+    
 
     const [selectValue, setSelectValue] = useState('all-pokemons')
     const trainerName = useSelector(states => states.trainerName)
 
-    const [initialPage, setInitialPage] = useState(1)
-    const contentPerPage = 16
-
-    const indexOfLastItem = initialPage * contentPerPage
-    const indexOfFirstItem = indexOfLastItem - contentPerPage
+    
 
     
     const url = 'https://pokeapi.co/api/v2/pokemon?limit=700&offset=0'
@@ -25,28 +20,39 @@ const Pokedex = () => {
     const urlTypes = 'https://pokeapi.co/api/v2/type'
     const [ types, getAllTypes ] = useFetch(urlTypes)
 
+    
+
+    const [initialPage, setInitialPage] = useState(1)
+    const contentPerPage = 8
+
+    const indexOfLastItem = initialPage * contentPerPage
+    const indexOfFirstItem = indexOfLastItem - contentPerPage
+
     const initialItems = pokemons?.results.slice(indexOfFirstItem, indexOfLastItem)
     
+
+
     useEffect(() => {
         if (selectValue === 'all-pokemons') {
-            getAllPokemons()
+          getAllPokemons()
         } else {
-            axios.get(setSelectValue)
-                .then(res => {
-                    const data = {
-                        results: res.data.pokemon.map(pokeInfo => pokeInfo.pokemon)
-                    }
-                    setPokemons(data)
-                })
-                .catch(err => console.log(err))
+          axios.get(selectValue)
+            .then(res => {
+              const data = {
+                results: res.data.pokemon.map(pokeInfo => pokeInfo.pokemon)
+              }
+              setPokemons(data)
+            })
+            .catch(err => console.log(err))
         }
-
-    }, [selectValue])
+      }, [selectValue])
 
     useEffect(() => {
         getAllTypes()
     }, [])
 
+    const searchPokemon  = useRef()
+    const navigate = useNavigate()
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -66,7 +72,7 @@ const Pokedex = () => {
             </div>
             <p className="pokedex__presentation"><span>Welcome {trainerName} !</span> , you can find your favorite pokemon</p>
             <form className="pokedex__form" onSubmit={handleSubmit}>
-                <input className="pokedex__input" ref={searchPokemon} type="text" placeholder="    Find your favorite Pokemon"/>
+                <input className="pokedex__input" ref={searchPokemon} type="text" placeholder="   Find your favorite Pokemon"/>
                 <button className="pokedex__btn">Search</button>
 
                 <select className="pokedex__selector" onChange={handleChangeType}>
@@ -76,7 +82,7 @@ const Pokedex = () => {
                             <option
                             value={typeInfo.url}
                             key={typeInfo.url}
-                            >{typeInfo.name}</option>
+                            ><p>{typeInfo.name}</p></option>
                             ))
                     }
                 </select>

@@ -2,6 +2,8 @@ import { useParams } from "react-router-dom"
 import useFetch from "../hooks/useFetch"
 import { useEffect } from "react"
 import './styles/PokemonCard.css'
+import Chart from "../components/Chart"
+
 
 const PokedexName = () => {
 
@@ -81,43 +83,11 @@ const PokedexName = () => {
                                 </ul>
                             </div>
 
-                            <div className="pokemon_body">
-                                <div className="pokemon_body-stats">
-                                    <h2 className="pokemon_body-title">Stats</h2> <hr className="pokemon_body-line"/> <img className="pokemon_body-img" src="pokeball.jpeg" alt="" />
-                                </div>
-                                <ul className="pokemon_body-list">
-                                        {
-                                            pokemon?.stats.map(statInfo => (
-                                                <li className="pokemon_body-items"
-                                                key={statInfo.base_stat}>
-                                                <div className="box_info">
-                                                    <div>
-                                                        {statInfo.stat.name}
-                                                    </div>
-                                                    <div>
-                                                        {statInfo.base_stat}/150
-                                                    </div>
-                                                </div>
-                                                <div className="pokemon_body-bar"></div>
-                                                </li>
-                                            ))
-                                        }                                
-                                </ul>
+                            <div className="chart">
+                                <p className="stats">stats</p>
+                                {pokemon && <Chart pokemon={pokemon} />}
                             </div>
-
-                            {/* <div>
-                                <h2>Moves</h2>
-                                <ul>
-                                        {
-                                            pokemon?.moves.map(moveInfo => (
-                                                <li className=""
-                                                key={moveInfo.move.url}>
-                                                {moveInfo.move.name}
-                                                </li>
-                                            ))
-                                        }                                
-                                </ul> 
-                            </div> */}
+                          
                         </div>
                     </>
                     
