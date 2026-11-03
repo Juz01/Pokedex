@@ -20,11 +20,7 @@ const PokedexName = () => {
 
   return (
     <>
-<<<<<<< HEAD
-        <div className="pokedex__sorry-container">
-=======
         <div className="pokedexNotFound-container">
->>>>>>> master
             {
                 hasError
                 ? 
